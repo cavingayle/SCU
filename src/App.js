@@ -1,3 +1,4 @@
+import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import styled from "styled-components";
@@ -9,6 +10,16 @@ import wbImage from "./images/computer.jpg";
 import navProfileImage from "./images/profile.jpg";
 
 function App() {
+  const [active, setActive] = useState(0);
+
+  const handleClick = (e) => {
+    const index = parseInt(e.target.id, 0);
+    console.log(index);
+    if (index !== active) {
+      setActive(index);
+    }
+  };
+
   return (
     <MainContainer>
       <Header>
@@ -65,56 +76,109 @@ function App() {
                 <BoxTwoHeader>
                   <BoxTwoNav>
                     <ul>
-                      <li>Overview</li>
-                      <li>Requirements</li>
-                      <li>Mentors</li>
-                      <li>Application</li>
+                      <CourseMenuItem
+                        onClick={handleClick}
+                        active={active === 0}
+                        id={0}
+                      >
+                        Overview
+                      </CourseMenuItem>
+                      <CourseMenuItem
+                        onClick={handleClick}
+                        active={active === 1}
+                        id={1}
+                      >
+                        Requirements
+                      </CourseMenuItem>
+                      <CourseMenuItem
+                        onClick={handleClick}
+                        active={active === 2}
+                        id={2}
+                      >
+                        Mentors
+                      </CourseMenuItem>
+                      <CourseMenuItem
+                        onClick={handleClick}
+                        active={active === 3}
+                        id={3}
+                      >
+                        Application
+                      </CourseMenuItem>
                     </ul>
                   </BoxTwoNav>
                 </BoxTwoHeader>
-                <h4>Course Overview</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eveniet corporis neque officia omnis, placeat rem mollitia at
-                  nihil nostrum inventore natus enim nobis excepturi laudantium
-                  rerum harum voluptatum consequuntur molestiae.
-                </p>
-                <CourseContainer>
-                  <div>
-                    <h4>Who is this course for</h4>
-                    <ul>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4>This Course Includes</h4>
-                    <ul>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                    </ul>
-                  </div>
-                </CourseContainer>
-                <CourseContainer>
-                  <div>
-                    <h4>What you will learn</h4>
-                    <ul>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4>Who is this course for</h4>
-                    <ul>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                      <li>Lorem ipsum dolor sit amet</li>
-                    </ul>
-                  </div>
-                </CourseContainer>
+                <CourseWrapper active={active === 0}>
+                  <h4>Course Overview</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet corporis neque officia omnis, placeat rem mollitia
+                    at nihil nostrum inventore natus enim nobis excepturi
+                    laudantium rerum harum voluptatum consequuntur molestiae.
+                  </p>
+                  <CourseContainer>
+                    <div>
+                      <h4>Who is this course for</h4>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4>This Course Includes</h4>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                      </ul>
+                    </div>
+                  </CourseContainer>
+                  <CourseContainer>
+                    <div>
+                      <h4>What you will learn</h4>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4>Who is this course for</h4>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                      </ul>
+                    </div>
+                  </CourseContainer>
+                </CourseWrapper>
+                <CourseWrapper active={active === 1}>
+                  <h4>Requirements</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet corporis neque officia omnis, placeat rem mollitia
+                    at nihil nostrum inventore natus enim nobis excepturi
+                    laudantium rerum harum voluptatum consequuntur molestiae.
+                  </p>
+                </CourseWrapper>
+                <CourseWrapper active={active === 2}>
+                  <h4>Mentors</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet corporis neque officia omnis, placeat rem mollitia
+                    at nihil nostrum inventore natus enim nobis excepturi
+                    laudantium rerum harum voluptatum consequuntur molestiae.
+                  </p>
+                </CourseWrapper>
+                <CourseWrapper active={active === 3}>
+                  <h4>Application</h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet corporis neque officia omnis, placeat rem mollitia
+                    at nihil nostrum inventore natus enim nobis excepturi
+                    laudantium rerum harum voluptatum consequuntur molestiae.
+                  </p>
+                </CourseWrapper>
               </Box2>
             </BoxContainer>
           </ContentWrapper>
@@ -226,14 +290,16 @@ const BoxTwoNav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
   }
-  li {
-    padding: 15px 20px;
+  div {
   }
-  li:nth-child(1) {
-    background: #3a4caa;
-    border-radius: 50px;
-    color: #fff;
-  }
+`;
+
+const CourseMenuItem = styled.li`
+  padding: 15px 20px;
+  background: ${({ active }) => (active ? "#3a4caa" : "")};
+  border-radius: ${({ active }) => (active ? "50px" : "")};
+  color: ${({ active }) => (active ? "#fff" : "")};
+  transition: ease-in-out;
 `;
 
 const BoxTwoHeader = styled.header`
@@ -250,8 +316,6 @@ const MainContainer = styled.div`
   background: #dbdce1;
   height: 100vh;
 `;
-
-
 
 const TitleWrapper = styled.div`
   padding-left: 25px;
@@ -276,4 +340,8 @@ const CourseContainer = styled.div`
   h4 {
     margin-bottom: 15px;
   }
+`;
+
+const CourseWrapper = styled.div`
+  ${(props) => (props.active ? "" : "display:none")}
 `;
